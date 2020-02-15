@@ -1,0 +1,11 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /tanjiu  #定义一级路径
+spring:
+  thymeleaf:
+    cache: false #禁用thymeleaf缓存，开发过程中开启
+  messages:
+    basename: i18n.login #国际化配置文件放置的真实位置
+  mvc:
+    date-format: yyyy-MM-dd #配置日期格式
