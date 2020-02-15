@@ -43,16 +43,31 @@ public class EmployeeController {
     @PostMapping("/emp")
     public String toAddpage(Employee employee){
         employeeDao.save(employee);
-        return "redirect:/emps";
+        return "redirect:/emps";//emps是调用的/emps方法，再一次跳转到列表页面
     }
     //修改员工信息
     @GetMapping("/emp/{id}")
     public String toUpdateEmployee(@PathVariable("id") Integer id,Model model){
-        System.out.println("执行了修改员工的mvc");
+//        System.out.println("执行了修改员工的mvc");
         //查出员工原来的信息
         Employee employee= employeeDao.getEmployeeById(id);
         model.addAttribute("emp",employee);
+
+        Collection<Department> departments=departmentDao.getDepartment();
+        model.addAttribute("departments",departments);
         return "emp/update";
     }
 
+    @PostMapping("/updateEmp")
+    public  String updateEmp(Employee employee){
+        employeeDao.save(employee);
+        return "redirect:/emps";
+    }
+
+    //删除员工
+    @RequestMapping("/delemp/{id}")
+    public String deleteEmpById(@PathVariable("id") Integer id){
+        employeeDao.deleteEmployee(id);
+        return "redirect:/emps";
+    }
 }
